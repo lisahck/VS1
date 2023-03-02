@@ -60,7 +60,7 @@ echo -e "${BOLD}Bei Fehlern in der Anwendung bitte hier die Log-Ausgaben prüfen
 confirm
 echo
 
-docker-compose -f docker-compose.dev.yml up --attach
+docker-compose -f docker-compose.dev.yml up --attach backend
 
 #echo
 #echo "Zum Stoppen der Container folgenden Befehl eingeben:"
