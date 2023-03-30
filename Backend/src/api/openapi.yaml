@@ -13,7 +13,7 @@ servers:
 - url: http://localhost:80080
 tags:
 - name: Index
-- name: Yoga-Kurs
+- name: YogaKurs
 paths:
   /:
     get:
@@ -36,7 +36,7 @@ paths:
   /Yoga-Kurs:
     get:
       tags:
-      - Yoga-Kurs
+      - YogaKurs
       summary: Yoga-Kurs-Teilnehmer suchen
       description: Suche nach Teilnehmer des Yoga-Kurses. Gibt eine Liste aller Teilnehmer passend zu
         den übergebenen Suchkriterien zurück.
@@ -78,7 +78,7 @@ paths:
                 x-content-type: application/json
     post:
       tags:
-      - Yoga-Kurs
+      - YogaKurs
       summary: Zum Yoga-Kurs anmelden
       description: "Neue Anmeldung eines Kursteilnehmers. Speichert die übergebene Anmeldung in der\
         \ Datenbank. Der Wert des Feldes \"_id\" wird dabei ignoriert, da in jedem Fall\
@@ -88,7 +88,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Yoga-Kurs'
+              $ref: '#/components/schemas/YogaKurs'
       responses:
         "201":
           description: Created
@@ -99,12 +99,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Yoga-Kurs'
+                $ref: '#/components/schemas/YogaKurs'
 
-  /Yoga-Kurs/{id}:
+  /YogaKurs/{id}:
     get:
       tags:
-      - Yoga-Kurs
+      - YogaKurs
       summary: Yoga-Kurs-Anmeldung lesen
       description: Liest eine einzelnen Yoga-Kurs-Anmeldung vom Server.
       operationId: get-anmeldung
@@ -122,7 +122,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Yoga-Kurs'
+                $ref: '#/components/schemas/YogaKurs'
         "404":
           description: Not Found
     put:
@@ -145,14 +145,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Yoga-Kurs'
+              $ref: '#/components/schemas/YogaKurs'
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Yoga-Kurs'
+                $ref: '#/components/schemas/YogaKurs'
         "404":
           description: Not Found
     patch:
@@ -175,19 +175,19 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Yoga-Kurs'
+              $ref: '#/components/schemas/YogaKurs'
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Yoga-Kurs'
+                $ref: '#/components/schemas/YogaKurs'
         "404":
           description: Not Found
     delete:
       tags:
-      - Yoga-Kurs
+      - YogaKurs
       summary: Anmeldung löschen
       description: Löscht eine Anmeldung auf dem Server.
       operationId: delete-anmeldung
@@ -244,8 +244,8 @@ components:
           items:
             type: string
 
-    Yoga-Kurs:
-      title: Yoga-Kurs
+    YogaKurs:
+      title: YogaKurs
       type: object
       properties:
         _links:
