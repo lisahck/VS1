@@ -58,7 +58,7 @@ paths:
         explode: true
         schema:
           type: string
-      - name: Mitgliedsnummer
+      - name: mitgliedsnummer
         in: query
         description: Gesuchte Mitgliedsnummer
         required: false
@@ -101,7 +101,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Yoga-Kurs'
 
-  /address/{id}:
+  /Yoga-Kurs/{id}:
     get:
       tags:
       - Yoga-Kurs
