@@ -17,7 +17,7 @@ export default class TeilnehmerController {
      * @param {String} prefix Gemeinsamer Prefix aller URLs
      */
     constructor(server, prefix) {
-        this._service = new Teilnehmerervice();
+        this._service = new TeilnehmerService();
         this._prefix = prefix;
 
         // Collection: Adressen
