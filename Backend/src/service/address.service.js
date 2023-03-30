@@ -8,12 +8,12 @@ import {ObjectId} from "mongodb";
  * eigentliche Anwendungslogik losgelöst vom technischen Übertragungsweg.
  * Die Adressen werden der Einfachheit halber in einer MongoDB abgelegt.
  */
-export default class AddressService {
+export default class TeilnehmerService {
     /**
      * Konstruktor.
      */
     constructor() {
-        this._addresses = DatabaseFactory.database.collection("addresses");
+        this._teilnehmer = DatabaseFactory.database.collection("teilnehmer");
     }
 
     /**
@@ -26,7 +26,7 @@ export default class AddressService {
      * @return {Promise} Liste der gefundenen Adressen
      */
     async search(query) {
-        let cursor = this._addresses.find(query, {
+        let cursor = this._teilnehmer.find(query, {
             sort: {
                 first_name: 1,
                 last_name: 1,
@@ -39,21 +39,20 @@ export default class AddressService {
     /**
      * Speichern einer neuen Adresse.
      *
-     * @param {Object} address Zu speichernde Adressdaten
+     * @param {Object} teilnehmer Zu speichernde Adressdaten
      * @return {Promise} Gespeicherte Adressdaten
      */
-    async create(address) {
-        address = address || {};
+    async create(teilnehmer) {
+        teilnehmer = teilnehmer || {};
 
-        let newAddress = {
-            first_name: address.first_name || "",
-            last_name:  address.last_name  || "",
-            phone:      address.phone      || "",
-            email:      address.email      || "",
+        let newTeilnehmer = {
+            first_name: teilnehmer.first_name || "",
+            last_name:  teilnehmer.last_name  || "",
+            mitgliedsnummer:      teilnehmer.mitgliedsnummer      || "",
         };
 
-        let result = await this._addresses.insertOne(newAddress);
-        return await this._addresses.findOne({_id: result.insertedId});
+        let result = await this._teilnehmer.insertOne(newTeilnehmer);
+        return await this._teilnehmer.findOne({_id: result.insertedId});
     }
 
     /**
@@ -63,7 +62,7 @@ export default class AddressService {
      * @return {Promise} Gefundene Adressdaten
      */
     async read(id) {
-        let result = await this._addresses.findOne({_id: new ObjectId(id)});
+        let result = await this._teilnehmer.findOne({_id: new ObjectId(id)});
         return result;
     }
 
@@ -75,21 +74,20 @@ export default class AddressService {
      * @param {[type]} address Zu speichernde Adressdaten
      * @return {Promise} Gespeicherte Adressdaten oder undefined
      */
-    async update(id, address) {
-        let oldAddress = await this._addresses.findOne({_id: new ObjectId(id)});
-        if (!oldAddress) return;
+    async update(id, teilnehmer) {
+        let oldTeilnehmer = await this._teilnehmer.findOne({_id: new ObjectId(id)});
+        if (!oldTeilnehmer) return;
 
         let updateDoc = {
             $set: {},
         }
 
-        if (address.first_name) updateDoc.$set.first_name = address.first_name;
-        if (address.last_name)  updateDoc.$set.last_name  = address.last_name;
-        if (address.phone)      updateDoc.$set.phone      = address.phone;
-        if (address.email)      updateDoc.$set.email      = address.email;
-
-        await this._addresses.updateOne({_id: new ObjectId(id)}, updateDoc);
-        return this._addresses.findOne({_id: new ObjectId(id)});
+        if (teilnehmer.first_name) updateDoc.$set.first_name = teilnehmer.first_name;
+        if (teilnehmer.last_name)  updateDoc.$set.last_name  = teilnehmer.last_name;
+        if (teilnehmer.mitgliedsnummer)      updateDoc.$set.mitgliedsnummer      = teilnehmer.mitgliedsnummer;
+       
+        await this._teilnehmer.updateOne({_id: new ObjectId(id)}, updateDoc);
+        return this._teilnehmer.findOne({_id: new ObjectId(id)});
     }
 
     /**
@@ -99,7 +97,7 @@ export default class AddressService {
      * @return {Promise} Anzahl der gelöschten Datensätze
      */
     async delete(id) {
-        let result = await this._addresses.deleteOne({_id: new ObjectId(id)});
+        let result = await this._teilnehmer.deleteOne({_id: new ObjectId(id)});
         return result.deletedCount;
     }
 }

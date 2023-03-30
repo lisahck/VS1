@@ -31,39 +31,34 @@ class DatabaseFactory {
      * wenigstens gleich ein paar Daten.
      */
     async _createDemoData() {
-        let addresses = this.database.collection("addresses");
+        let teilnehmer = this.database.collection("teilnehmer");
 
-        if (await addresses.estimatedDocumentCount() === 0) {
-            addresses.insertMany([
+        if (await teilnehmer.estimatedDocumentCount() === 0) {
+            teilnehmer.insertMany([
                 {
                     first_name: "Willy",
                     last_name: "Tanner",
-                    phone: "+49 711 564412",
-                    email: "willy.tanner@alf.com",
+                    mitgliedsnummer: "4121",
                 },
                 {
                     first_name: "Michael",
                     last_name: "Knight",
-                    phone: "+49 721 554194",
-                    email: "michael@knight-rider.com",
+                    mitgliedsnummer: "4194",
                 },
                 {
                     first_name: "Fox",
                     last_name: "Mulder",
-                    phone: "+49 721 553181",
-                    email: "mulder@xfiles.com",
+                    mitgliedsnummer: "3181",
                 },
                 {
                     first_name: "Dana",
                     last_name: "Scully",
-                    phone: "+49 721 572287",
-                    email: "scully@xfiles.com",
+                    mitgliedsnummer: "2287",
                 },
                 {
                     first_name: "Elwood",
                     last_name: "Blues",
-                    phone: "+49 721 957338",
-                    email: "elwood@blues-brothers.com",
+                    mitgliedsnummer: "7338",
                 },
             ]);
         }
